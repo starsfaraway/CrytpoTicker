@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		C9A8A5981F40029F00921950 /* CrytpoTicker.h in Headers */ = {isa = PBXBuildFile; fileRef = C9A8A5961F40029F00921950 /* CrytpoTicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C9A8A5A11F4002BA00921950 /* Ticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A59F1F4002BA00921950 /* Ticker.swift */; };
+		C9A8A5A51F4007EB00921950 /* CTAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5A41F4007EB00921950 /* CTAPIController.swift */; };
+		C9A8A5A81F40107600921950 /* CoinMarketCapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5A71F40107600921950 /* CoinMarketCapConstants.swift */; };
+		C9A8A5AC1F40165C00921950 /* CryptoTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5AB1F40165C00921950 /* CryptoTicker.swift */; };
+		C9A8A5B01F401AAF00921950 /* MRObjectArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5AF1F401AAF00921950 /* MRObjectArchive.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C9A8A5931F40029F00921950 /* CrytpoTicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CrytpoTicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A8A5961F40029F00921950 /* CrytpoTicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrytpoTicker.h; sourceTree = "<group>"; };
 		C9A8A5971F40029F00921950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9A8A59F1F4002BA00921950 /* Ticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ticker.swift; sourceTree = "<group>"; };
+		C9A8A5A41F4007EB00921950 /* CTAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAPIController.swift; sourceTree = "<group>"; };
+		C9A8A5A71F40107600921950 /* CoinMarketCapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinMarketCapConstants.swift; sourceTree = "<group>"; };
+		C9A8A5AB1F40165C00921950 /* CryptoTicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTicker.swift; sourceTree = "<group>"; };
+		C9A8A5AF1F401AAF00921950 /* MRObjectArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MRObjectArchive.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,9 +57,38 @@
 			isa = PBXGroup;
 			children = (
 				C9A8A5961F40029F00921950 /* CrytpoTicker.h */,
+				C9A8A5AB1F40165C00921950 /* CryptoTicker.swift */,
 				C9A8A5971F40029F00921950 /* Info.plist */,
+				C9A8A5A21F4007C700921950 /* Networking */,
+				C9A8A5A91F40162100921950 /* Model */,
+				C9A8A5A61F40105A00921950 /* Constants */,
 			);
 			path = CrytpoTicker;
+			sourceTree = "<group>";
+		};
+		C9A8A5A21F4007C700921950 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				C9A8A5A41F4007EB00921950 /* CTAPIController.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		C9A8A5A61F40105A00921950 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				C9A8A5A71F40107600921950 /* CoinMarketCapConstants.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		C9A8A5A91F40162100921950 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C9A8A59F1F4002BA00921950 /* Ticker.swift */,
+				C9A8A5AF1F401AAF00921950 /* MRObjectArchive.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +135,7 @@
 					C9A8A5921F40029F00921950 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = LC6LA68FBS;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,6 +172,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9A8A5A81F40107600921950 /* CoinMarketCapConstants.swift in Sources */,
+				C9A8A5B01F401AAF00921950 /* MRObjectArchive.swift in Sources */,
+				C9A8A5A11F4002BA00921950 /* Ticker.swift in Sources */,
+				C9A8A5AC1F40165C00921950 /* CryptoTicker.swift in Sources */,
+				C9A8A5A51F4007EB00921950 /* CTAPIController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +287,7 @@
 		C9A8A59C1F40029F00921950 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LC6LA68FBS;
@@ -254,6 +300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.farawaystars.CrytpoTicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -261,6 +308,7 @@
 		C9A8A59D1F40029F00921950 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = LC6LA68FBS;
@@ -296,6 +344,7 @@
 				C9A8A59D1F40029F00921950 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
