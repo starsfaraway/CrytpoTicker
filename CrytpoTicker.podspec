@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CrytpoTicker"
-  s.version      = "0.1.1"
+  s.version      = "0.1.3"
   s.summary      = "Gets cryptocurrency price data from coinmarketcap.com."
 
   # This description is used to generate tags and improve search results.
@@ -80,7 +80,7 @@ s.ios.deployment_target = "10.0"
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "v0.1.1" }
+  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "v0.1.3" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
