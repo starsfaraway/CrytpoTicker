@@ -1,3 +1,11 @@
+<a href=https://github.com/starsfaraway/CrytpoTicker/blob/master/README.md#crytpoticker>Description</a>
+
+<a href=https://github.com/starsfaraway/CrytpoTicker/blob/master/README.md#requirements>Requirements</a>
+
+<a href=https://github.com/starsfaraway/CrytpoTicker/blob/master/README.md#installation>Installation</a>
+
+<a href=https://github.com/starsfaraway/CrytpoTicker/blob/master/README.md#to-use>To Use</a>
+
 # CrytpoTicker
 Swift Framework that requests current cryptocurrency prices from coinmarketcap.com
 
