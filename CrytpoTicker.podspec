@@ -10,15 +10,15 @@ Pod::Spec.new do |s|
 
 
   s.name         = "CrytpoTicker"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "Gets cryptocurrency price data from coinmarketcap.com."
 
   s.description  = <<-DESC
-  Gets cryptocurrency price data from coinmarketcap.com. Please see coinmarketcap.com api.
+  Gets cryptocurrency price data from coinmarketcap.com. Please see coinmarketcap.com api.  
                    DESC
 
   s.homepage     = "https://github.com/starsfaraway/CrytpoTicker"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+
 
 
   s.license      = "MIT"
@@ -26,27 +26,10 @@ Pod::Spec.new do |s|
 
   s.author             = { "Matthew" => "xmatthewx@pme.me" }
 
-s.platform     = :ios, "12.0"
+  s.platform     = :ios, "12.0"
 
-s.ios.deployment_target = "10.0"
-
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the location from where the source should be retrieved.
-  #  Supports git, hg, bzr, svn and HTTP.
-  #
-
-  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "v0.1.3" }
-
-
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  CocoaPods is smart about how it includes source code. For source files
-  #  giving a folder will include any swift, h, m, mm, c & cpp files.
-  #  For header files it will include any header in the folder.
-  #  Not including the public_header_files will make all headers public.
-  #
+  s.ios.deployment_target = "12.0"
+  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "v0.1.4" }
 
   s.source_files  = "CrytpoTicker/*.{h,m,swift}"
 
