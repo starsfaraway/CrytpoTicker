@@ -14,9 +14,12 @@ public class CryptoTicker: NSObject {
         
         if(Ticker.isUpdateAvailable()) {
             CTAPIController.shared.retrieveTicker(limit: limit, convert: convert) { (response) -> (Void) in
-                if let tickerArray = response as? [NSDictionary] {
-                    NSKeyedArchiver.archiveRootObject(Date(), toFile: MRObjectArchive.filePath(withExtension: ArchivePaths.lastTickerUpdate))
-                    completion(Ticker.createArrayOfTickers(fromArrayOfDicts: tickerArray))}
+                if let tickerData = response as? Data {
+                    guard let tickers = Tickers.decode(data: tickerData) else {
+                        completion(nil)
+                        return}
+                    NSKeyedArchiver.archiveRootObject(tickerData, toFile: MRObjectArchive.filePath(withExtension: ArchivePaths.lastTickerUpdate))
+                    completion(tickers.tickerList)}
                 else{
                     completion(CryptoTicker.getSavedTickerInfo())
                 }
@@ -27,13 +30,9 @@ public class CryptoTicker: NSObject {
     
     internal class func getSavedTickerInfo() -> [Ticker]? {
         if let data = MRObjectArchive.retrieveDataFromArchive(fromExtension: ArchivePaths.lastReceivedTickerInfo) {
-            do {
-                let jsonObj = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0))
-                if let tickerArray = jsonObj as? [NSDictionary] {
-                    return Ticker.createArrayOfTickers(fromArrayOfDicts: tickerArray)}
-            }catch {
-
-            }
+            guard let tickers = Tickers.decode(data: data) else {
+                return nil}
+            return tickers.tickerList
         }
         return nil
     }

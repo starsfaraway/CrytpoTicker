@@ -36,14 +36,8 @@ internal class CTAPIController: NSObject, URLSessionDelegate {
                 completion(nil)}
             
             if let validData = data {
-                do {
-                    MRObjectArchive.saveDataInArchive(data: validData, withExtension: ArchivePaths.lastReceivedTickerInfo)
-                    let retval = try JSONSerialization.jsonObject(with: validData, options: JSONSerialization.ReadingOptions(rawValue: 0))
-                    completion(retval)}
-                catch {
-                    completion(nil)}
+                completion(validData)
             }else {
-                
                 completion(nil)}
         }
         

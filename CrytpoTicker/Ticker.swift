@@ -8,42 +8,61 @@
 
 import UIKit
 
-public class Ticker: NSObject {
+public class Tickers : NSObject, Codable {
+    public var tickerList : [Ticker]?
+    
+    static func encoded(ticks : Tickers) -> Data? {
+        let encoder = JSONEncoder()
+        let encoded = try? encoder.encode(ticks)
+        return encoded
+    }
+    
+    static func decode(data : Data) -> Tickers? {
+        let decoder = JSONDecoder()
+        do{
+            let retval = try decoder.decode(Tickers.self, from: data)
+            return retval
+        }catch {
+            return nil}
+    }
+}
+
+public class Ticker: NSObject, Codable {
     
     public var id : String?
     public var name : String?
     public var symbol : String?
     public var rank : String?
-    public var price_usd : NSNumber?
-    public var price_btc : NSNumber?
-    public var market_cap_usd : NSNumber?
-    public var available_supply : NSNumber?
-    public var total_supply : NSNumber?
-    public var percent_change_1h : NSNumber?
-    public var percent_change_24h : NSNumber?
-    public var percent_change_7d : NSNumber?
-    public var last_updated : NSNumber?
+    public var price_usd : Double?
+    public var price_btc : Double?
+    public var market_cap_usd : Double?
+    public var available_supply : Double?
+    public var total_supply : Double?
+    public var percent_change_1h : Double?
+    public var percent_change_24h : Double?
+    public var percent_change_7d : Double?
+    public var the_24h_volume_usd : Double?
+    public var last_updated : Int?
     
-    //THIS ONE IS A PROBLEM : API SENDS VARIABLE STARTING WITH A NUMBER *****
-    public var the_24h_volume_usd : NSNumber?
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case symbol
+        case rank
+        case price_usd
+        case price_btc
+        case market_cap_usd
+        case total_supply
+        case percent_change_1h
+        case percent_change_24h
+        case percent_change_7d
+        case the_24h_volume_usd = "24h_volume_usd"
+        case last_updated
+    }
     
     //CLASS ONLY SUPPORTS USD, TO ADD ADDITIONAL CURRENCIES, ADD 'price_eur', ETC.
     
-    internal convenience init(withDict : NSDictionary) {
-        self.init()
-        
-        for (key, _) in withDict {
-            if let keyName = key as? String {
-                if(self.responds(to: NSSelectorFromString(keyName))) {
-                    self.setValue(withDict[keyName], forKey: keyName)}
-                //fix here for ***** above
-                self.setValue(withDict[keyName], forKey: "the_24h_volume_usd")
-                
-            }
-            
-        }
-    }
-    
+
     //API REQUEsTS LIMITED TO 10 PER MINUTE https://coinmarketcap.com/api/
     internal class func isUpdateAvailable() ->  Bool {
         if let lastUpdate : Date = NSKeyedUnarchiver.unarchiveObject(withFile: MRObjectArchive.filePath(withExtension: ArchivePaths.lastTickerUpdate)) as? Date {
@@ -54,16 +73,6 @@ public class Ticker: NSObject {
             return true}
     }
     
-    //MARK: ARRAY OF TICKERS
-    
-    internal class func createArrayOfTickers(fromArrayOfDicts : [NSDictionary]) -> [Ticker] {
-        var tickers : [Ticker] = []
-        for tickerDict in fromArrayOfDicts {
-            let ticker = Ticker.init(withDict: tickerDict)
-            tickers.append(ticker)
-        }
-        return tickers
-    }
 }
 
 extension Ticker {
@@ -76,32 +85,30 @@ extension Ticker {
         if let coinRank = rank {
             retval += "Rank: " + coinRank + "\r"}
         if let usdPrice = price_usd {
-            retval += "USD Price: " + "\(usdPrice.doubleValue)" + "\r"
-        
-            if let hourChange = percent_change_1h {
-                retval += "\tChange last hour: $" + "\(0.01 * hourChange.doubleValue * (price_usd?.doubleValue)!)" + "\r"}
-            if let dayChange = percent_change_24h {
-                retval += "\tChange last day: $" + "\(0.01 * dayChange.doubleValue * (price_usd?.doubleValue)!)" + "\r"}
-            if let weekChange = percent_change_7d {
-                retval += "\tChange last week: $" + "\(0.01 * weekChange.doubleValue * (price_usd?.doubleValue)!)" + "\r"}
+            retval += "USD Price: " + "\(usdPrice)" + "\r"
             
-        
+            if let hourChange = percent_change_1h {
+                retval += "\tChange last hour: $" + "\(0.01 * hourChange * (price_usd)!)" + "\r"}
+            if let dayChange = percent_change_24h {
+                retval += "\tChange last day: $" + "\(0.01 * dayChange * (price_usd)!)" + "\r"}
+            if let weekChange = percent_change_7d {
+                retval += "\tChange last week: $" + "\(0.01 * weekChange * (price_usd)!)" + "\r"}
         }
         if let btcPrice = price_btc {
-            retval += "BTC Price: " + "\(btcPrice.doubleValue)" + "\r"}
+            retval += "BTC Price: " + "\(btcPrice)" + "\r"}
         if let volume = the_24h_volume_usd {
-            retval += "Volume (USD): " + "\(volume.doubleValue)" + "\r"}
+            retval += "Volume (USD): " + "\(volume)" + "\r"}
         if let marketCapUSD = market_cap_usd {
-            retval += "Market Cap (USD): " + "\(marketCapUSD.doubleValue)" + "\r"}
+            retval += "Market Cap (USD): " + "\(marketCapUSD)" + "\r"}
         if let available = available_supply {
-            retval += "Available Supply: " + "\(available.doubleValue)" + "\r"}
+            retval += "Available Supply: " + "\(available)" + "\r"}
         if let total = total_supply {
-            retval += "Total Supply: " + "\(total.doubleValue)" + "\r"}
+            retval += "Total Supply: " + "\(total)" + "\r"}
         
         
         
         if let lastUpdate = last_updated {
-            let lastDate = Date.init(timeIntervalSinceReferenceDate: lastUpdate.doubleValue)
+            let lastDate = Date.init(timeIntervalSinceReferenceDate: TimeInterval(lastUpdate))
             let dateFormatter = DateFormatter()
             dateFormatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
             retval += "\r\rLast Update: " + dateFormatter.string(from: lastDate) + "\r"}
