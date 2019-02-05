@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "CrytpoTicker"
-  s.version      = "0.1.4"
+  s.version      = "0.1.5"
   s.summary      = "Gets cryptocurrency price data from coinmarketcap.com."
 
   s.description  = <<-DESC
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   s.swift_version = "4.2"
   
   s.ios.deployment_target = "12.0"
-  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "0.1.4" }
+  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "0.1.5" }
 
   s.source_files  = "CrytpoTicker/*.{h,m,swift}"
 
