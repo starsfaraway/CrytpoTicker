@@ -27,7 +27,8 @@ Pod::Spec.new do |s|
   s.author             = { "Matthew" => "xmatthewx@pme.me" }
 
   s.platform     = :ios, "12.0"
-
+  s.swift_version = "4.2"
+  
   s.ios.deployment_target = "12.0"
   s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "0.1.4" }
 
