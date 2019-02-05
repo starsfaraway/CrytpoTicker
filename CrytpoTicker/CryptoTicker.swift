@@ -18,7 +18,7 @@ public class CryptoTicker: NSObject {
                     guard let tickers = Tickers.decode(data: tickerData) else {
                         completion(nil)
                         return}
-                    NSKeyedArchiver.archiveRootObject(tickerData, toFile: MRObjectArchive.filePath(withExtension: ArchivePaths.lastTickerUpdate))
+                    _ = CryptoTicker.archive(data: tickerData)
                     completion(tickers.tickerList)}
                 else{
                     completion(CryptoTicker.getSavedTickerInfo())
@@ -37,5 +37,17 @@ public class CryptoTicker: NSObject {
         return nil
     }
     
+    private class func archive(data: Data) -> Bool {
+        do {
+            let secureData = try NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
+            guard let url = URL(string:ArchivePaths.lastTickerUpdate) else {
+                return false}
+            
+            try? secureData.write(to: url)
+            return true
+        }catch {
+            return false
+        }
+    }
 
 }

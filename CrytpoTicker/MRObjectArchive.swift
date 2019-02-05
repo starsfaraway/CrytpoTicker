@@ -19,16 +19,30 @@ class MRObjectArchive: NSObject {
     
     class func saveDataInArchive(data : Data, withExtension: String) {
         let path = MRObjectArchive.filePath(withExtension: withExtension)
-        NSKeyedArchiver.archiveRootObject(data, toFile: path)
+
+        do {
+            let securedData = try NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
+            if let url = URL(string: path) {
+                try securedData.write(to: url)}
+        }catch {
+            //Data could not be saved. Not a fatal error
+        }
     }
     
     class func retrieveDataFromArchive(fromExtension : String) -> Data? {
         let path = MRObjectArchive.filePath(withExtension: fromExtension)
-        if let retval =  NSKeyedUnarchiver.unarchiveObject(withFile: path) as? Data {
-            return retval
-        }else{
+        guard let url = URL(string: path) else {
+            return nil}
+        do {
+            let securedData = try Data.init(contentsOf: url)
+            if let retval =  try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(securedData) as? Data {
+                return retval}
+        }
+        catch {
             return nil
         }
+        
+        return nil
         
     }
 }

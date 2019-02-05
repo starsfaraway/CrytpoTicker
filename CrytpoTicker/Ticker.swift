@@ -65,12 +65,21 @@ public class Ticker: NSObject, Codable {
 
     //API REQUEsTS LIMITED TO 10 PER MINUTE https://coinmarketcap.com/api/
     internal class func isUpdateAvailable() ->  Bool {
-        if let lastUpdate : Date = NSKeyedUnarchiver.unarchiveObject(withFile: MRObjectArchive.filePath(withExtension: ArchivePaths.lastTickerUpdate)) as? Date {
+        do {
+            guard let url = URL(string: ArchivePaths.lastTickerUpdate) else {
+                return false}
+            let securedData = try Data.init(contentsOf: url)
+            if let lastUpdate : Date = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(securedData) as? Date {
             //PREVENTS UPDATING MORE THAN 10 TIMES PER MINUTE
-            return -lastUpdate.timeIntervalSinceNow > 7.0}
-        else{
-            //NO DATE SAVED, SHOULD BE FIRST REQUEST
-            return true}
+                return -lastUpdate.timeIntervalSinceNow > 7.0
+            }else{
+                //NO DATE SAVED, SHOULD BE FIRST REQUEST
+                return true}
+        }
+        catch {
+            return true
+        }
+        
     }
     
 }
