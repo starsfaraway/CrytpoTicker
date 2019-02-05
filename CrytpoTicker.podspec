@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "12.0"
 
   s.ios.deployment_target = "12.0"
-  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "v0.1.4" }
+  s.source       = { :git => "https://github.com/starsfaraway/CrytpoTicker.git", :tag => "0.1.4" }
 
   s.source_files  = "CrytpoTicker/*.{h,m,swift}"
 
