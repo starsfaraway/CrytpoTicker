@@ -8,24 +8,6 @@
 
 import UIKit
 
-public class Tickers : NSObject, Codable {
-    public var tickerList : [Ticker]?
-    
-    static func encoded(ticks : Tickers) -> Data? {
-        let encoder = JSONEncoder()
-        let encoded = try? encoder.encode(ticks)
-        return encoded
-    }
-    
-    static func decode(data : Data) -> Tickers? {
-        let decoder = JSONDecoder()
-        do{
-            let retval = try decoder.decode(Tickers.self, from: data)
-            return retval
-        }catch {
-            return nil}
-    }
-}
 
 public class Ticker: NSObject, Codable {
     
@@ -33,16 +15,16 @@ public class Ticker: NSObject, Codable {
     public var name : String?
     public var symbol : String?
     public var rank : String?
-    public var price_usd : Double?
-    public var price_btc : Double?
-    public var market_cap_usd : Double?
-    public var available_supply : Double?
-    public var total_supply : Double?
-    public var percent_change_1h : Double?
-    public var percent_change_24h : Double?
-    public var percent_change_7d : Double?
-    public var the_24h_volume_usd : Double?
-    public var last_updated : Int?
+    public var price_usd : String?
+    public var price_btc : String?
+    public var market_cap_usd : String?
+    public var available_supply : String?
+    public var total_supply : String?
+    public var percent_change_1h : String?
+    public var percent_change_24h : String?
+    public var percent_change_7d : String?
+    public var the_24h_volume_usd : String?
+    public var last_updated : String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -60,27 +42,22 @@ public class Ticker: NSObject, Codable {
         case last_updated
     }
     
-    //CLASS ONLY SUPPORTS USD, TO ADD ADDITIONAL CURRENCIES, ADD 'price_eur', ETC.
-    
-
-    //API REQUEsTS LIMITED TO 10 PER MINUTE https://coinmarketcap.com/api/
-    internal class func isUpdateAvailable() ->  Bool {
-        do {
-            guard let url = URL(string: ArchivePaths.lastTickerUpdate) else {
-                return false}
-            let securedData = try Data.init(contentsOf: url)
-            if let lastUpdate : Date = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(securedData) as? Date {
-            //PREVENTS UPDATING MORE THAN 10 TIMES PER MINUTE
-                return -lastUpdate.timeIntervalSinceNow > 7.0
-            }else{
-                //NO DATE SAVED, SHOULD BE FIRST REQUEST
-                return true}
-        }
-        catch {
-            return true
-        }
-        
+    static func encoded(tick : Ticker) -> Data? {
+        let encoder = JSONEncoder()
+        let encoded = try? encoder.encode(tick)
+        return encoded
     }
+    
+    static func decode(data : Data) -> [Ticker]? {
+        let decoder = JSONDecoder()
+        do{
+            let retval = try decoder.decode([Ticker].self, from: data)
+            return retval
+        }catch {
+            return nil}
+    }
+    
+    //CLASS ONLY SUPPORTS USD, TO ADD ADDITIONAL CURRENCIES, ADD 'price_eur', ETC.
     
 }
 
@@ -94,30 +71,22 @@ extension Ticker {
         if let coinRank = rank {
             retval += "Rank: " + coinRank + "\r"}
         if let usdPrice = price_usd {
-            retval += "USD Price: " + "\(usdPrice)" + "\r"
-            
-            if let hourChange = percent_change_1h {
-                retval += "\tChange last hour: $" + "\(0.01 * hourChange * (price_usd)!)" + "\r"}
-            if let dayChange = percent_change_24h {
-                retval += "\tChange last day: $" + "\(0.01 * dayChange * (price_usd)!)" + "\r"}
-            if let weekChange = percent_change_7d {
-                retval += "\tChange last week: $" + "\(0.01 * weekChange * (price_usd)!)" + "\r"}
-        }
+            retval += "USD Price: " + "$" + usdPrice + "\r"}
         if let btcPrice = price_btc {
-            retval += "BTC Price: " + "\(btcPrice)" + "\r"}
+            retval += "BTC Price: " + btcPrice + "\r"}
         if let volume = the_24h_volume_usd {
-            retval += "Volume (USD): " + "\(volume)" + "\r"}
+            retval += "Volume (USD): " + volume + "\r"}
         if let marketCapUSD = market_cap_usd {
-            retval += "Market Cap (USD): " + "\(marketCapUSD)" + "\r"}
+            retval += "Market Cap (USD): " + marketCapUSD + "\r"}
         if let available = available_supply {
-            retval += "Available Supply: " + "\(available)" + "\r"}
+            retval += "Available Supply: " + available + "\r"}
         if let total = total_supply {
-            retval += "Total Supply: " + "\(total)" + "\r"}
-        
-        
-        
+            retval += "Total Supply: " + total + "\r"}
+
+
+
         if let lastUpdate = last_updated {
-            let lastDate = Date.init(timeIntervalSinceReferenceDate: TimeInterval(lastUpdate))
+            let lastDate = Date.init(timeIntervalSinceReferenceDate: TimeInterval(lastUpdate) ?? 0)
             let dateFormatter = DateFormatter()
             dateFormatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
             retval += "\r\rLast Update: " + dateFormatter.string(from: lastDate) + "\r"}

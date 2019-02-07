@@ -21,13 +21,13 @@ CocoaPods is a dependency manager for Cocoa projects. You can install it with th
 
 To integrate CryptoTicker into your Xcode project using CocoaPods, specify it in your Podfile:
 
-     platform :ios, '10.0'
+     platform :ios, '12.0'
 
      use_frameworks!
 
      target '<Your Target Name>' do
      
-          pod 'CrytpoTicker', '~> 0.1.3'
+          pod 'CrytpoTicker', '~> 0.1.7'
     
      end
 
@@ -53,20 +53,20 @@ tickerInfo is the Ticker object with the following properties, use as desired:
      
      var rank : String?
      
-     var price_usd : NSNumber?
+     var price_usd : String?
      
-     var price_btc : NSNumber?
+     var price_btc : String?
      
-     var market_cap_usd : NSNumber?
+     var market_cap_usd : String?
      
-     var available_supply : NSNumber?
+     var available_supply : String?
      
-     var total_supply : NSNumber?
+     var total_supply : String?
      
-     var percent_change_1h : NSNumber?
+     var percent_change_1h : String?
      
-     var percent_change_24h : NSNumber?
+     var percent_change_24h : String?
      
-     var percent_change_7d : NSNumber?
+     var percent_change_7d : String?
      
-     var last_updated : NSNumber?
+     var last_updated : String?

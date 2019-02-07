@@ -12,7 +12,6 @@
 		C9A8A5A51F4007EB00921950 /* CTAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5A41F4007EB00921950 /* CTAPIController.swift */; };
 		C9A8A5A81F40107600921950 /* CoinMarketCapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5A71F40107600921950 /* CoinMarketCapConstants.swift */; };
 		C9A8A5AC1F40165C00921950 /* CryptoTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5AB1F40165C00921950 /* CryptoTicker.swift */; };
-		C9A8A5B01F401AAF00921950 /* MRObjectArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A8A5AF1F401AAF00921950 /* MRObjectArchive.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +22,6 @@
 		C9A8A5A41F4007EB00921950 /* CTAPIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CTAPIController.swift; sourceTree = "<group>"; };
 		C9A8A5A71F40107600921950 /* CoinMarketCapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinMarketCapConstants.swift; sourceTree = "<group>"; };
 		C9A8A5AB1F40165C00921950 /* CryptoTicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoTicker.swift; sourceTree = "<group>"; };
-		C9A8A5AF1F401AAF00921950 /* MRObjectArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MRObjectArchive.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				C9A8A59F1F4002BA00921950 /* Ticker.swift */,
-				C9A8A5AF1F401AAF00921950 /* MRObjectArchive.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -173,7 +170,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9A8A5A81F40107600921950 /* CoinMarketCapConstants.swift in Sources */,
-				C9A8A5B01F401AAF00921950 /* MRObjectArchive.swift in Sources */,
 				C9A8A5A11F4002BA00921950 /* Ticker.swift in Sources */,
 				C9A8A5AC1F40165C00921950 /* CryptoTicker.swift in Sources */,
 				C9A8A5A51F4007EB00921950 /* CTAPIController.swift in Sources */,

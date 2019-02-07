@@ -9,7 +9,7 @@
 import Foundation
 
 internal struct CoinMarketCap {
-    static let baseUrl = "https://api.coinmarketcap.com/v1/ticker/"
+    static let baseUrl = "https://api.coinmarketcap.com/v1/ticker"
 }
 
 internal struct ErrorMessages {
@@ -19,6 +19,6 @@ internal struct ErrorMessages {
 }
 
 internal struct ArchivePaths {
-    static let lastTickerUpdate = "last_ticker_update_path"
+
     static let lastReceivedTickerInfo = "last_recieved_ticker_json"
 }
